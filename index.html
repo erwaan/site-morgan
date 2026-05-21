@@ -77,7 +77,6 @@
       display:flex; flex-direction:column; justify-content:flex-end;
       padding:0 3.5rem 5.5rem;
     }
-    /* grid bg */
     .hero::before {
       content:''; position:absolute; inset:0;
       background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
@@ -216,6 +215,15 @@
     }
     .gitem:hover img { transform:scale(1.06); filter:brightness(1); }
 
+    /* PDF embed dans gitem */
+    .gitem embed {
+      width:100%; height:100%; display:block;
+      pointer-events:none;
+      transition:transform .5s ease, filter .4s;
+      filter:brightness(.85);
+    }
+    .gitem:hover embed { transform:scale(1.06); filter:brightness(1); }
+
     /* placeholder quand image absente */
     .gitem-placeholder {
       width:100%; height:100%; display:flex; flex-direction:column;
@@ -250,6 +258,7 @@
       background:rgba(12,26,50,.8); backdrop-filter:blur(8px);
       border:1px solid var(--line); padding:.25rem .6rem;
       font-size:.58rem; letter-spacing:.15em; text-transform:uppercase; color:var(--cream-dim);
+      z-index:2;
     }
 
     /* video item */
@@ -286,7 +295,8 @@
     #lb { display:none; position:fixed; inset:0; z-index:8000; background:rgba(8,16,32,.96); align-items:center; justify-content:center; }
     #lb.open { display:flex; }
     #lb img { max-width:90vw; max-height:88vh; object-fit:contain; border:1px solid var(--line); }
-    #lb-close { position:absolute; top:1.5rem; right:2rem; font-size:1.5rem; color:var(--cream-dim); cursor:pointer; background:none; border:none; font-family:'Syne',sans-serif; transition:color .2s; }
+    #lb embed { width:80vw; height:88vh; border:1px solid var(--line); }
+    #lb-close { position:absolute; top:1.5rem; right:2rem; font-size:1.5rem; color:var(--cream-dim); cursor:pointer; background:none; border:none; font-family:'Syne',sans-serif; transition:color .2s; z-index:1; }
     #lb-close:hover { color:var(--gold); }
     #lb-caption { position:absolute; bottom:2rem; left:50%; transform:translateX(-50%); font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--cream-dim); text-align:center; }
 
@@ -340,7 +350,7 @@
 <!-- LIGHTBOX -->
 <div id="lb">
   <button id="lb-close">✕</button>
-  <img id="lb-img" src="" alt="">
+  <div id="lb-inner"></div>
   <div id="lb-caption"></div>
 </div>
 
@@ -464,9 +474,9 @@
 
   <div class="gallery-grid reveal">
 
-    <!-- 1 -->
-    <div class="gitem" data-title="Affiche — Journée mondiale sans tabac" data-num="1" onclick="openLb('static/bts/01.jpg','Affiche — Journée mondiale sans tabac · Fondation ILDYS')">
-      <img src="static/bts/01.jpg" alt="Affiche journée sans tabac" onerror="this.parentElement.innerHTML=phHtml(1,'Stage','Journée mondiale sans tabac')">
+    <!-- 1 — PDF -->
+    <div class="gitem" onclick="openLb('assets/images/1 Journee_mondiale_sans_tabac_2023 2 (1).pdf','Affiche — Journée mondiale sans tabac · Fondation ILDYS', true)">
+      <embed src="assets/images/1 Journee_mondiale_sans_tabac_2023 2 (1).pdf#toolbar=0&navpanes=0&scrollbar=0&view=Fit" type="application/pdf">
       <div class="gitem-badge">Stage</div>
       <div class="gitem-overlay">
         <span class="gitem-label">Fondation ILDYS</span>
@@ -474,9 +484,9 @@
       </div>
     </div>
 
-    <!-- 2 -->
-    <div class="gitem" data-title="Affiche — Forum des associations" data-num="2" onclick="openLb('static/bts/02.jpg','Affiche — Forum des associations · Fondation ILDYS')">
-      <img src="static/bts/02.jpg" alt="Affiche forum associations" onerror="this.parentElement.innerHTML=phHtml(2,'Stage','Forum des associations')">
+    <!-- 2 — PDF -->
+    <div class="gitem" onclick="openLb('assets/images/2 forum des associations.pdf','Affiche — Forum des associations · Fondation ILDYS', true)">
+      <embed src="assets/images/2 forum des associations.pdf#toolbar=0&navpanes=0&scrollbar=0&view=Fit" type="application/pdf">
       <div class="gitem-badge">Stage</div>
       <div class="gitem-overlay">
         <span class="gitem-label">Fondation ILDYS</span>
@@ -484,9 +494,9 @@
       </div>
     </div>
 
-    <!-- 3 -->
-    <div class="gitem" data-title="Affiche — Fête de la musique" data-num="3" onclick="openLb('static/bts/03.jpg','Affiche — Fête de la musique · Fondation ILDYS')">
-      <img src="static/bts/03.jpg" alt="Affiche fête de la musique" onerror="this.parentElement.innerHTML=phHtml(3,'Stage','Fête de la musique')">
+    <!-- 3 — PDF -->
+    <div class="gitem" onclick="openLb('assets/images/3 affiche fête de la musique 2023 jc.pdf','Affiche — Fête de la musique · Fondation ILDYS', true)">
+      <embed src="assets/images/3 affiche fête de la musique 2023 jc.pdf#toolbar=0&navpanes=0&scrollbar=0&view=Fit" type="application/pdf">
       <div class="gitem-badge">Stage</div>
       <div class="gitem-overlay">
         <span class="gitem-label">Fondation ILDYS</span>
@@ -494,9 +504,9 @@
       </div>
     </div>
 
-    <!-- 4 -->
-    <div class="gitem" data-title="Fiche produit — Blossom Savonnerie" data-num="4" onclick="openLb('static/bts/04.jpg','Fiche produit · Blossom Savonnerie')">
-      <img src="static/bts/04.jpg" alt="Fiche produit Blossom" onerror="this.parentElement.innerHTML=phHtml(4,'Stage','Fiche produit')">
+    <!-- 4 — JPG -->
+    <div class="gitem" onclick="openLb('assets/images/4 FICHE CHAMP DE FLEURS.jpg','Fiche produit · Blossom Savonnerie', false)">
+      <img src="assets/images/4 FICHE CHAMP DE FLEURS.jpg" alt="Fiche produit Blossom">
       <div class="gitem-badge">Stage</div>
       <div class="gitem-overlay">
         <span class="gitem-label">Blossom Savonnerie</span>
@@ -504,9 +514,9 @@
       </div>
     </div>
 
-    <!-- 5 -->
-    <div class="gitem" data-title="Carte-cadeau — Proposition 1" data-num="5" onclick="openLb('static/bts/05.jpg','Carte-cadeau proposition 1 · Blossom Savonnerie')">
-      <img src="static/bts/05.jpg" alt="Carte-cadeau 1 Blossom" onerror="this.parentElement.innerHTML=phHtml(5,'Stage','Carte-cadeau n°1')">
+    <!-- 5 — PNG -->
+    <div class="gitem" onclick="openLb('assets/images/5 carte cadeau blossom.png','Carte-cadeau proposition 1 · Blossom Savonnerie', false)">
+      <img src="assets/images/5 carte cadeau blossom.png" alt="Carte-cadeau 1 Blossom">
       <div class="gitem-badge">Stage</div>
       <div class="gitem-overlay">
         <span class="gitem-label">Blossom Savonnerie</span>
@@ -514,9 +524,9 @@
       </div>
     </div>
 
-    <!-- 6 -->
-    <div class="gitem" data-title="Carte-cadeau — Proposition 2" data-num="6" onclick="openLb('static/bts/06.jpg','Carte-cadeau proposition 2 · Blossom Savonnerie')">
-      <img src="static/bts/06.jpg" alt="Carte-cadeau 2 Blossom" onerror="this.parentElement.innerHTML=phHtml(6,'Stage','Carte-cadeau n°2')">
+    <!-- 6 — PNG -->
+    <div class="gitem" onclick="openLb('assets/images/6 carte cadeau blossom.png','Carte-cadeau proposition 2 · Blossom Savonnerie', false)">
+      <img src="assets/images/6 carte cadeau blossom.png" alt="Carte-cadeau 2 Blossom">
       <div class="gitem-badge">Stage</div>
       <div class="gitem-overlay">
         <span class="gitem-label">Blossom Savonnerie</span>
@@ -524,9 +534,9 @@
       </div>
     </div>
 
-    <!-- 7 -->
-    <div class="gitem" data-title="Logo — Rugby Ovalie Lorient" data-num="7" onclick="openLb('static/bts/07.jpg','Logo · Rugby Ovalie Lorient')">
-      <img src="static/bts/07.jpg" alt="Logo Rugby Ovalie Lorient" onerror="this.parentElement.innerHTML=phHtml(7,'Cours','Logo Rugby Ovalie')">
+    <!-- 7 — PNG -->
+    <div class="gitem" onclick="openLb('assets/images/7 Logo R.O.L.png','Logo · Rugby Ovalie Lorient', false)">
+      <img src="assets/images/7 Logo R.O.L.png" alt="Logo Rugby Ovalie Lorient">
       <div class="gitem-badge">Cours</div>
       <div class="gitem-overlay">
         <span class="gitem-label">Rugby Ovalie Lorient</span>
@@ -534,9 +544,9 @@
       </div>
     </div>
 
-    <!-- 8 -->
-    <div class="gitem" data-title="Template Instagram — Rugby Ovalie" data-num="8" onclick="openLb('static/bts/08.jpg','Template publications Instagram · Rugby Ovalie Lorient')">
-      <img src="static/bts/08.jpg" alt="Template Instagram Rugby" onerror="this.parentElement.innerHTML=phHtml(8,'Cours','Template Instagram')">
+    <!-- 8 — PNG -->
+    <div class="gitem" onclick="openLb('assets/images/8 Template Instagram R.O.L.png','Template publications Instagram · Rugby Ovalie Lorient', false)">
+      <img src="assets/images/8 Template Instagram R.O.L.png" alt="Template Instagram Rugby">
       <div class="gitem-badge">Cours</div>
       <div class="gitem-overlay">
         <span class="gitem-label">Rugby Ovalie Lorient</span>
@@ -544,9 +554,9 @@
       </div>
     </div>
 
-    <!-- 9 -->
-    <div class="gitem" data-title="Encart publicitaire — Crêperie Trehin Le Corre" data-num="9" onclick="openLb('static/bts/09.jpg','Encart publicitaire Le Télégramme · Crêperie Trehin Le Corre')">
-      <img src="static/bts/09.jpg" alt="Encart publicitaire crêperie" onerror="this.parentElement.innerHTML=phHtml(9,'Cours','Encart publicitaire')">
+    <!-- 9 — PNG -->
+    <div class="gitem" onclick="openLb('assets/images/9 encart publicitaire.png','Encart publicitaire Le Télégramme · Crêperie Trehin Le Corre', false)">
+      <img src="assets/images/9 encart publicitaire.png" alt="Encart publicitaire crêperie">
       <div class="gitem-badge">Cours</div>
       <div class="gitem-overlay">
         <span class="gitem-label">Crêperie Trehin Le Corre × Le Télégramme</span>
@@ -573,9 +583,9 @@
 
   <div class="gallery-grid reveal">
 
-    <!-- 1 -->
-    <div class="gitem" onclick="openLb('static/bachelor/01.jpg','Affiche — Dernière des guinguettes 2025 · La Maison Blanche')">
-      <img src="static/bachelor/01.jpg" alt="Dernière guinguette 2025" onerror="this.parentElement.innerHTML=phHtml(1,'Alternance','Dernière guinguette 2025')">
+    <!-- 1 — PDF -->
+    <div class="gitem" onclick="openLb('assets/images/1 LA DER DES GUINGUETTES AFFICHE A3.pdf','Affiche — Dernière des guinguettes 2025 · La Maison Blanche', true)">
+      <embed src="assets/images/1 LA DER DES GUINGUETTES AFFICHE A3.pdf#toolbar=0&navpanes=0&scrollbar=0&view=Fit" type="application/pdf">
       <div class="gitem-badge">Alternance</div>
       <div class="gitem-overlay">
         <span class="gitem-label">La Maison Blanche</span>
@@ -583,9 +593,9 @@
       </div>
     </div>
 
-    <!-- 2 -->
-    <div class="gitem" onclick="openLb('static/bachelor/02.jpg','Affiche — Spectacle humoristique · La Maison Blanche')">
-      <img src="static/bachelor/02.jpg" alt="Spectacle humoristique" onerror="this.parentElement.innerHTML=phHtml(2,'Alternance','Spectacle humoristique')">
+    <!-- 2 — PDF -->
+    <div class="gitem" onclick="openLb('assets/images/2 Affiche sketch lmb 28.pdf','Affiche — Spectacle humoristique · La Maison Blanche', true)">
+      <embed src="assets/images/2 Affiche sketch lmb 28.pdf#toolbar=0&navpanes=0&scrollbar=0&view=Fit" type="application/pdf">
       <div class="gitem-badge">Alternance</div>
       <div class="gitem-overlay">
         <span class="gitem-label">La Maison Blanche</span>
@@ -593,9 +603,9 @@
       </div>
     </div>
 
-    <!-- 3 -->
-    <div class="gitem" onclick="openLb('static/bachelor/03.jpg','Affiche — Guinguettes 2026 · La Maison Blanche')">
-      <img src="static/bachelor/03.jpg" alt="Guinguettes 2026" onerror="this.parentElement.innerHTML=phHtml(3,'Alternance','Guinguettes 2026')">
+    <!-- 3 — PDF -->
+    <div class="gitem" onclick="openLb('assets/images/3 Guinguette 2026 prog.pdf','Affiche — Guinguettes 2026 · La Maison Blanche', true)">
+      <embed src="assets/images/3 Guinguette 2026 prog.pdf#toolbar=0&navpanes=0&scrollbar=0&view=Fit" type="application/pdf">
       <div class="gitem-badge">Alternance</div>
       <div class="gitem-overlay">
         <span class="gitem-label">La Maison Blanche</span>
@@ -603,9 +613,9 @@
       </div>
     </div>
 
-    <!-- 4 -->
-    <div class="gitem" onclick="openLb('static/bachelor/04.jpg','Affiche cocktail Dry January n°1 · La Maison Blanche')">
-      <img src="static/bachelor/04.jpg" alt="Cocktail Dry January 1" onerror="this.parentElement.innerHTML=phHtml(4,'Alternance','Cocktail Dry January n°1')">
+    <!-- 4 — PDF -->
+    <div class="gitem" onclick="openLb('assets/images/4 COCKTAIL dry january.pdf','Affiche cocktail Dry January n°1 · La Maison Blanche', true)">
+      <embed src="assets/images/4 COCKTAIL dry january.pdf#toolbar=0&navpanes=0&scrollbar=0&view=Fit" type="application/pdf">
       <div class="gitem-badge">Alternance</div>
       <div class="gitem-overlay">
         <span class="gitem-label">La Maison Blanche</span>
@@ -613,9 +623,9 @@
       </div>
     </div>
 
-    <!-- 5 -->
-    <div class="gitem" onclick="openLb('static/bachelor/05.jpg','Affiche cocktail Dry January n°2 · La Maison Blanche')">
-      <img src="static/bachelor/05.jpg" alt="Cocktail Dry January 2" onerror="this.parentElement.innerHTML=phHtml(5,'Alternance','Cocktail Dry January n°2')">
+    <!-- 5 — PDF -->
+    <div class="gitem" onclick="openLb('assets/images/5 COCKTAIL dry january (1).pdf','Affiche cocktail Dry January n°2 · La Maison Blanche', true)">
+      <embed src="assets/images/5 COCKTAIL dry january (1).pdf#toolbar=0&navpanes=0&scrollbar=0&view=Fit" type="application/pdf">
       <div class="gitem-badge">Alternance</div>
       <div class="gitem-overlay">
         <span class="gitem-label">La Maison Blanche</span>
@@ -623,9 +633,9 @@
       </div>
     </div>
 
-    <!-- 6 -->
-    <div class="gitem" onclick="openLb('static/bachelor/06.jpg','Template affiche cocktail du mois · La Maison Blanche')">
-      <img src="static/bachelor/06.jpg" alt="Template cocktail du mois" onerror="this.parentElement.innerHTML=phHtml(6,'Alternance','Template cocktail du mois')">
+    <!-- 6 — PDF -->
+    <div class="gitem" onclick="openLb('assets/images/6 cocktaildumois.pdf','Template affiche cocktail du mois · La Maison Blanche', true)">
+      <embed src="assets/images/6 cocktaildumois.pdf#toolbar=0&navpanes=0&scrollbar=0&view=Fit" type="application/pdf">
       <div class="gitem-badge">Alternance</div>
       <div class="gitem-overlay">
         <span class="gitem-label">La Maison Blanche</span>
@@ -633,9 +643,9 @@
       </div>
     </div>
 
-    <!-- 7 -->
-    <div class="gitem" onclick="openLb('static/bachelor/07.jpg','Affiche Beaujolais nouveau · La Maison Blanche')">
-      <img src="static/bachelor/07.jpg" alt="Beaujolais nouveau" onerror="this.parentElement.innerHTML=phHtml(7,'Alternance','Beaujolais nouveau')">
+    <!-- 7 — PDF -->
+    <div class="gitem" onclick="openLb('assets/images/7 Affiche Beaujolais LMB  (1).pdf','Affiche Beaujolais nouveau · La Maison Blanche', true)">
+      <embed src="assets/images/7 Affiche Beaujolais LMB  (1).pdf#toolbar=0&navpanes=0&scrollbar=0&view=Fit" type="application/pdf">
       <div class="gitem-badge">Alternance</div>
       <div class="gitem-overlay">
         <span class="gitem-label">La Maison Blanche</span>
@@ -643,9 +653,9 @@
       </div>
     </div>
 
-    <!-- 8 -->
-    <div class="gitem" onclick="openLb('static/bachelor/08.jpg','Story Instagram — Budget participatif Brest')">
-      <img src="static/bachelor/08.jpg" alt="Story budget participatif" onerror="this.parentElement.innerHTML=phHtml(8,'Alternance','Story budget participatif')">
+    <!-- 8 — PDF -->
+    <div class="gitem" onclick="openLb('assets/images/8 Coup de La Maison Blanche.pdf','Story Instagram — Budget participatif Brest', true)">
+      <embed src="assets/images/8 Coup de La Maison Blanche.pdf#toolbar=0&navpanes=0&scrollbar=0&view=Fit" type="application/pdf">
       <div class="gitem-badge">Alternance</div>
       <div class="gitem-overlay">
         <span class="gitem-label">Instagram</span>
@@ -653,9 +663,9 @@
       </div>
     </div>
 
-    <!-- 9 -->
-    <div class="gitem" onclick="openLb('static/bachelor/09.jpg','Carte snacking · La Maison Blanche')">
-      <img src="static/bachelor/09.jpg" alt="Carte snacking" onerror="this.parentElement.innerHTML=phHtml(9,'Alternance','Carte snacking')">
+    <!-- 9 — PDF -->
+    <div class="gitem" onclick="openLb('assets/images/9 cartesnacking.pdf','Carte snacking · La Maison Blanche', true)">
+      <embed src="assets/images/9 cartesnacking.pdf#toolbar=0&navpanes=0&scrollbar=0&view=Fit" type="application/pdf">
       <div class="gitem-badge">Alternance</div>
       <div class="gitem-overlay">
         <span class="gitem-label">La Maison Blanche</span>
@@ -663,9 +673,9 @@
       </div>
     </div>
 
-    <!-- 10 -->
-    <div class="gitem" onclick="openLb('static/bachelor/10.jpg','Affiche guinguette Rock & Rétro 5 avril · La Maison Blanche')">
-      <img src="static/bachelor/10.jpg" alt="Guinguette Rock Rétro" onerror="this.parentElement.innerHTML=phHtml(10,'Alternance','Guinguette Rock & Rétro')">
+    <!-- 10 — PDF -->
+    <div class="gitem" onclick="openLb('assets/images/10 Programmation 2026.pdf','Affiche guinguette Rock & Rétro · La Maison Blanche', true)">
+      <embed src="assets/images/10 Programmation 2026.pdf#toolbar=0&navpanes=0&scrollbar=0&view=Fit" type="application/pdf">
       <div class="gitem-badge">Alternance</div>
       <div class="gitem-overlay">
         <span class="gitem-label">La Maison Blanche</span>
@@ -673,9 +683,9 @@
       </div>
     </div>
 
-    <!-- 11 -->
-    <div class="gitem" onclick="openLb('static/bachelor/11.jpg','Affiche apéro sophrologie · La Maison Blanche')">
-      <img src="static/bachelor/11.jpg" alt="Apéro sophrologie" onerror="this.parentElement.innerHTML=phHtml(11,'Alternance','Apéro sophrologie')">
+    <!-- 11 — PDF -->
+    <div class="gitem" onclick="openLb('assets/images/11 Apéro sophro 2026.pdf','Affiche apéro sophrologie · La Maison Blanche', true)">
+      <embed src="assets/images/11 Apéro sophro 2026.pdf#toolbar=0&navpanes=0&scrollbar=0&view=Fit" type="application/pdf">
       <div class="gitem-badge">Alternance</div>
       <div class="gitem-overlay">
         <span class="gitem-label">La Maison Blanche</span>
@@ -683,9 +693,9 @@
       </div>
     </div>
 
-    <!-- 12 -->
-    <div class="gitem" onclick="openLb('static/bachelor/12.jpg','Affiche atelier sophrologie · La Maison Blanche')">
-      <img src="static/bachelor/12.jpg" alt="Atelier sophrologie" onerror="this.parentElement.innerHTML=phHtml(12,'Alternance','Atelier sophrologie')">
+    <!-- 12 — PDF -->
+    <div class="gitem" onclick="openLb('assets/images/12 affiche apero sophrologie.pdf','Affiche atelier sophrologie · La Maison Blanche', true)">
+      <embed src="assets/images/12 affiche apero sophrologie.pdf#toolbar=0&navpanes=0&scrollbar=0&view=Fit" type="application/pdf">
       <div class="gitem-badge">Alternance</div>
       <div class="gitem-overlay">
         <span class="gitem-label">La Maison Blanche</span>
@@ -693,9 +703,9 @@
       </div>
     </div>
 
-    <!-- 13 -->
-    <div class="gitem" onclick="openLb('static/bachelor/13.jpg','Affiche marché de Noël · La Maison Blanche')">
-      <img src="static/bachelor/13.jpg" alt="Marché de Noël" onerror="this.parentElement.innerHTML=phHtml(13,'Alternance','Marché de Noël')">
+    <!-- 13 — PDF -->
+    <div class="gitem" onclick="openLb('assets/images/13 marche de noel lmb.pdf','Affiche marché de Noël · La Maison Blanche', true)">
+      <embed src="assets/images/13 marche de noel lmb.pdf#toolbar=0&navpanes=0&scrollbar=0&view=Fit" type="application/pdf">
       <div class="gitem-badge">Alternance</div>
       <div class="gitem-overlay">
         <span class="gitem-label">La Maison Blanche</span>
@@ -703,9 +713,9 @@
       </div>
     </div>
 
-    <!-- 14 -->
-    <div class="gitem" onclick="openLb('static/bachelor/14.jpg','Affiche cocktail de février · La Maison Blanche')">
-      <img src="static/bachelor/14.jpg" alt="Cocktail février" onerror="this.parentElement.innerHTML=phHtml(14,'Alternance','Cocktail de février')">
+    <!-- 14 — PDF -->
+    <div class="gitem" onclick="openLb('assets/images/14 Cocktail French Kiss.pdf','Affiche cocktail de février · La Maison Blanche', true)">
+      <embed src="assets/images/14 Cocktail French Kiss.pdf#toolbar=0&navpanes=0&scrollbar=0&view=Fit" type="application/pdf">
       <div class="gitem-badge">Alternance</div>
       <div class="gitem-overlay">
         <span class="gitem-label">La Maison Blanche</span>
@@ -713,9 +723,9 @@
       </div>
     </div>
 
-    <!-- 15 -->
-    <div class="gitem" onclick="openLb('static/bachelor/15.jpg','Logo magasin de vinyles fictif · Cours PAO')">
-      <img src="static/bachelor/15.jpg" alt="Logo vinyles" onerror="this.parentElement.innerHTML=phHtml(15,'Cours PAO','Logo magasin de vinyles')">
+    <!-- 15 — PNG -->
+    <div class="gitem" onclick="openLb('assets/images/15Logos Planet Groovy Morgan Boisard-01.png','Logo magasin de vinyles fictif · Cours PAO', false)">
+      <img src="assets/images/15Logos Planet Groovy Morgan Boisard-01.png" alt="Logo vinyles">
       <div class="gitem-badge">Cours PAO</div>
       <div class="gitem-overlay">
         <span class="gitem-label">Initiation PAO</span>
@@ -724,7 +734,7 @@
     </div>
 
     <!-- 16 — vidéo -->
-    <div class="gitem">
+    <!-- <div class="gitem">
       <div class="gitem-video">
         <video src="static/bachelor/16.mp4" muted loop preload="metadata" poster="static/bachelor/16-thumb.jpg"
           onmouseenter="this.play()" onmouseleave="this.pause()"></video>
@@ -737,7 +747,7 @@
         <span class="gitem-label">La Maison Blanche</span>
         <span class="gitem-title">After movie — Dernière des guinguettes 2025</span>
       </div>
-    </div>
+    </div> -->
 
   </div>
 </section>
@@ -758,8 +768,8 @@
 
   <div class="gallery-grid reveal" style="grid-template-columns:repeat(auto-fill,minmax(320px,1fr))">
 
-    <div class="gitem" style="aspect-ratio:1/1" onclick="openLb('static/perso/01.jpg','Logo — Association Territoire d\'outres Rennes')">
-      <img src="static/perso/01.jpg" alt="Logo Territoire d'outres" onerror="this.parentElement.innerHTML=phHtml(1,'Perso','Logo association')">
+    <div class="gitem" style="aspect-ratio:1/1" onclick="openLb('assets/images/15Logos Planet Groovy Morgan Boisard-01.png','Logo — Association Territoire d\'outres Rennes', false)">
+      <img src="assets/images/15Logos Planet Groovy Morgan Boisard-01.png" alt="Logo Territoire d'outres">
       <div class="gitem-badge">Perso</div>
       <div class="gitem-overlay">
         <span class="gitem-label">Association</span>
@@ -792,25 +802,34 @@
     el.addEventListener('mouseleave',()=>{ cur.style.transform='translate(-50%,-50%) scale(1)'; ring.style.width='32px'; ring.style.height='32px'; });
   });
 
-  /* ── placeholder helper ── */
-  function phHtml(n, badge, label) {
-    return `<div class="gitem-placeholder">
-      <div class="ph-num">${String(n).padStart(2,'0')}</div>
-      <div class="ph-icon"><svg viewBox="0 0 24 24" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
-      <span>${badge} · ${label}</span>
-    </div>`;
-  }
-
   /* ── lightbox ── */
-  function openLb(src, caption) {
+  function openLb(src, caption, isPdf) {
     const lb = document.getElementById('lb');
-    document.getElementById('lb-img').src = src;
+    const inner = document.getElementById('lb-inner');
+    if (isPdf) {
+      inner.innerHTML = `<embed src="${src}#toolbar=1&navpanes=0&scrollbar=1&view=Fit" type="application/pdf" style="width:80vw;height:88vh;border:1px solid rgba(237,232,223,0.1);">`;
+    } else {
+      inner.innerHTML = `<img src="${src}" alt="" style="max-width:90vw;max-height:88vh;object-fit:contain;border:1px solid rgba(237,232,223,0.1);">`;
+    }
     document.getElementById('lb-caption').textContent = caption || '';
     lb.classList.add('open');
   }
-  document.getElementById('lb-close').addEventListener('click', () => document.getElementById('lb').classList.remove('open'));
-  document.getElementById('lb').addEventListener('click', e => { if(e.target === e.currentTarget || e.target === document.getElementById('lb-img').parentElement) document.getElementById('lb').classList.remove('open'); });
-  document.addEventListener('keydown', e => { if(e.key==='Escape') document.getElementById('lb').classList.remove('open'); });
+  document.getElementById('lb-close').addEventListener('click', () => {
+    document.getElementById('lb').classList.remove('open');
+    document.getElementById('lb-inner').innerHTML = '';
+  });
+  document.getElementById('lb').addEventListener('click', e => {
+    if(e.target === e.currentTarget) {
+      document.getElementById('lb').classList.remove('open');
+      document.getElementById('lb-inner').innerHTML = '';
+    }
+  });
+  document.addEventListener('keydown', e => {
+    if(e.key==='Escape') {
+      document.getElementById('lb').classList.remove('open');
+      document.getElementById('lb-inner').innerHTML = '';
+    }
+  });
 
   /* ── reveal on scroll ── */
   const obs = new IntersectionObserver(entries => {
